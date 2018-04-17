@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Rookie Game
 
 You can use the [editor on GitHub](https://github.com/jhordanres/rookiegame/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
