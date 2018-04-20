@@ -13,11 +13,11 @@ public class MoviCursor : MonoBehaviour {
 	public float angulox = 0.0f;
 	public float anguloy = 0.0f;
 	public float anguloz = 0.0f;
-	public int ejeX = 0;
+	public int ejeX = -1;
 	public int ejeY = 0;
 	public int pulsador = 1;
 
-	public float velocidad = 0.02f;
+	public float velocidad = 10f;
 
 	// Use this for initialization
 	void Start () {
@@ -60,15 +60,15 @@ public class MoviCursor : MonoBehaviour {
 			String dataRaw = serial.ReadLine();
 			ultimoData = dataRaw;
 			try {
-				string[] datoArray = dataRaw.Split(",".ToCharArray(),6);
+				string[] datoArray = dataRaw.Split(",".ToCharArray(),2);
 				((MoviCursor) parent).angulox = float.Parse(datoArray[0]);
 				((MoviCursor) parent).anguloy = float.Parse(datoArray[1]);
-				((MoviCursor) parent).anguloz = float.Parse(datoArray[2]);
+				//((MoviCursor) parent).anguloz = float.Parse(datoArray[2]);
 
 
-				((MoviCursor) parent).ejeX = int.Parse(datoArray[3]);
-				((MoviCursor) parent).ejeY = int.Parse(datoArray[4]);
-				((MoviCursor) parent).pulsador = int.Parse(datoArray[5]);
+				//((MoviCursor) parent).ejeX = int.Parse(datoArray[3]);
+				//((MoviCursor) parent).ejeY = int.Parse(datoArray[4]);
+				//((MoviCursor) parent).pulsador = int.Parse(datoArray[5]);
 			} catch (Exception e) {
 				//Debug.Log ("Error:"+e.Message+ "["+ultimoData+"]");
 			}
@@ -92,15 +92,26 @@ public class MoviCursor : MonoBehaviour {
 		//Quaternion target = Quaternion.Euler(angulox,anguloy,0);
 		//transform.rotation = target;
 
-		if (angulox < 0) {
+		if (angulox > 25f) {
 			this.transform.Translate (Vector2.left * Time.deltaTime, Space.World);
+			Debug.Log ("Estoy dentro del rango de angulo x");
 		} else {
-			this.transform.Translate (Vector2.right * Time.deltaTime, Space.World);
+			this.transform.Translate (Vector2.right * 0);
 		}
-		if (anguloy < 0) {
-			this.transform.Translate (Vector2.down * Time.deltaTime, Space.World);
+		if(angulox < -25f){
+			this.transform.Translate (-Vector2.left * Time.deltaTime, Space.World);
+			Debug.Log ("Estoy dentro del rango de angulo x");
+		
 		} else {
-			this.transform.Translate (Vector2.up * Time.deltaTime, Space.World);
+			this.transform.Translate (Vector2.right * 0);
+		}
+		if (anguloy > 25f) {
+			this.transform.Translate (Vector2.down * Time.deltaTime, Space.World);
+		}
+		if(anguloy < -25f){
+			this.transform.Translate (-Vector2.down * Time.deltaTime, Space.World);
+		} else {
+			this.transform.Translate (Vector2.up * 0);
 		}
 
 

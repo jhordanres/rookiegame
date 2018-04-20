@@ -69,26 +69,26 @@ void loop() {
   //respectivamente con la formula de la tangente
   Acc[0] =atan((AcX/A_R)    /sqrt(pow((AcY/A_R),2) + pow((AcZ/A_R),2))) * RAD_TO_DEG;
   Acc[1] =atan((AcY/A_R)    /sqrt(pow((AcX/A_R),2) + pow((AcZ/A_R),2))) * RAD_TO_DEG;
-  Acc[2] =atan((AcZ/A_R)    /sqrt(pow((AcX/A_R),2) + pow((AcY/A_R),2))) * RAD_TO_DEG;
+  //Acc[2] =atan((AcZ/A_R)    /sqrt(pow((AcX/A_R),2) + pow((AcY/A_R),2))) * RAD_TO_DEG;
 
   //Leer los valores del Giroscopio
   Wire.beginTransmission(MPU);
-  Wire.write(0x3B);
+  Wire.write(0x43);
   Wire.endTransmission(false);
   Wire.requestFrom(MPU,4,true);//A diferencia del acelerometro solo se piden 4 registros
   GyX =Wire.read()<<8|Wire.read();
   GyY =Wire.read()<<8|Wire.read();
-  GyZ =Wire.read()<<8|Wire.read();
+  //GyZ =Wire.read()<<8|Wire.read();
 
   //Calculo de angulos
   Gy[0] = GyX/G_R;
   Gy[1] = GyY/G_R;
-  Gy[2] = GyZ/G_R;
+  //Gy[2] = GyZ/G_R;
 
   //Aplicar el filtro Complementario
   Angle1 = 0.98*(Angle1+Gy[0]*0.010) + 0.02*Acc[0];
   Angle2 = 0.98*(Angle2+Gy[1]*0.010) + 0.02*Acc[1];
-  Angle3 = 0.98*(Angle3+Gy[2]*0.010) + 0.02*Acc[2];
+  //Angle3 = 0.98*(Angle3+Gy[2]*0.010) + 0.02*Acc[2];
 
   //Mostrar los valores por consola
   //Serial.print("Angle x:"); Serial.print(Angle1); Serial.print("\n");
@@ -107,5 +107,7 @@ void loop() {
 
   EstadoPulsador = digitalRead(Pulsador);
 
-  Serial.println(String(Angle1)+","+String(Angle2)+","+String(Angle3)+","+String(xPosicion)+","+String(yPosicion)+","+(EstadoPulsador));
+  //Serial.println(String(Angle1)+","+String(Angle2)+","+String(Angle3)+","+String(xPosicion)+","+String(yPosicion)+","+(EstadoPulsador));
+
+  Serial.println(String(Angle1)+","+String(Angle2));
 }
