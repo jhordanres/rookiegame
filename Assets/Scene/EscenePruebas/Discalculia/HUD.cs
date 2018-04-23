@@ -54,31 +54,40 @@ public class HUD : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
-        //Banner.localPosition = Vector2.MoveTowards(Banner.localPosition, new Vector2(0, -395.5f), 700 * Time.deltaTime);
         Preguntar(numPregunta);
     }
 
     private void Preguntar(int pregunta)
     {
-        
-        //if (!UIcompletado)
-        //{
-            txtTitulo.text = preguntas[numPregunta];
-            txtTitulo.color = Color.Lerp(transparent, fullColor, t1);
-            if (t1 <= 1 && !UIcompletado)
-            {
-                t1 += Time.deltaTime / 2.5f;
-            }
-            else
-            {
-            Debug.Log("entro");
-                txtTitulo.fontSize = 80;
-                Titulo.localPosition = Vector2.MoveTowards(Titulo.localPosition, topTitulo, 700 * Time.deltaTime);
-                if(Titulo.position == topTitulo) UIcompletado = true;
-                PreguntaActual.localPosition = Vector2.MoveTowards(PreguntaActual.localPosition, new Vector2(0, 0), 1000 * Time.deltaTime);
 
+        txtTitulo.text = preguntas[numPregunta];
+        txtTitulo.color = Color.Lerp(transparent, fullColor, t1);
+        if (t1 <= 1 && !UIcompletado) t1 += Time.deltaTime / 2.5f;
+        else
+        {
+            if (Titulo.position == topTitulo) UIcompletado = true;
+            txtTitulo.fontSize = 80;
+            Titulo.localPosition = Vector2.MoveTowards(Titulo.localPosition, topTitulo, 700 * Time.deltaTime);
+            MostrarResultado();
+            PreguntaActual.localPosition = Vector2.MoveTowards(PreguntaActual.localPosition, new Vector2(0, 0), 1000 * Time.deltaTime);
         }
-        //}
+    }
+
+    private void OcultarPregunta(int pregunta)
+    {
+        txtTitulo.text = preguntas[numPregunta];
+        txtTitulo.color = Color.Lerp(fullColor, transparent, t1);
+        Destroy(PreguntaActual.gameObject);
+        if (t1 <= 1) t1 += Time.deltaTime / 2.5f;
+    }
+
+    private void MostrarResultado()
+    {
+        Banner.localPosition = Vector2.MoveTowards(Banner.localPosition, new Vector2(0, -395.5f), 700 * Time.deltaTime);
+    }
+
+    private void OcultarResultado()
+    {
+        Banner.localPosition = Vector2.MoveTowards(Banner.localPosition, new Vector2(0, -701), 700 * Time.deltaTime);
     }
 }

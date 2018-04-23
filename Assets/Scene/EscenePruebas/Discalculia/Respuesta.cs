@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Preguntar : MonoBehaviour {
+public class Respuesta : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
