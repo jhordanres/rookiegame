@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Respuesta : MonoBehaviour {
 
+    HUD scriptHUD;
 	// Use this for initialization
 	void Start () {
 		
@@ -11,6 +12,11 @@ public class Respuesta : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        scriptHUD = GameObject.Find("Canvas").GetComponent<HUD>();
 	}
+
+    private void SiguentePregunta()
+    {
+        scriptHUD.setNext(true);
+    }
 }
