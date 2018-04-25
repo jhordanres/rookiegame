@@ -98,10 +98,13 @@ public class Pregunctas : MonoBehaviour {
 
     private void PasarPregunta()
     {
-        Debug.Log("que hay");
         Destroy(preActual.gameObject);
         ocultarPregunta = false;
         numPregunta++;
-        mostrarPregunta = true;
+        if (Preguntas.Length > numPregunta)
+        {          
+            mostrarPregunta = true;
+        }
+        
     }
 }
