@@ -24,9 +24,9 @@ public class Pregunctas : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        score = transform.Find("scorePanel/score"); /*Se busca el objeto dentro de los hijos de Canvas*/
-        scorePanel = transform.Find("scorePanel"); /*Se busca el panel el cual contiene el nombre del estudiante, score y ultima puntuacion*/
-        scorePanel.localPosition = new Vector2(0, -701.1f); /*Se le asigna una posicion por fuera del GUI*/
+        score = transform.Find("score"); /*Se busca el objeto dentro de los hijos de Canvas*/
+        //scorePanel = transform.Find("scorePanel"); /*Se busca el panel el cual contiene el nombre del estudiante, score y ultima puntuacion*/
+        //scorePanel.localPosition = new Vector2(0, -701.1f); /*Se le asigna una posicion por fuera del GUI*/
         txtScore = score.GetComponent<Text>(); /* se obtiene el atributo Text para poder modificar el score con cada pregunta*/
         scoreCount = 0; /*Se inicializa el contador en cero para empezar la actividad de un estudiante*/
         numPregunta = 0; /*Se inicia por la primer pregunta del arreglo preguntas[]*/
@@ -44,8 +44,8 @@ public class Pregunctas : MonoBehaviour {
             MostrarPregunta(numPregunta);
         }
         if (ocultarPregunta) PasarPregunta();
-        if (mostrarScore) MostrarResultado();
-        if (ocultarScore) OcultarResultado();
+        //if (mostrarScore) MostrarResultado();
+        //if (ocultarScore) OcultarResultado();
 
         /*Permite mostrar el resultado por un tiempo de 5 segundos*/
         if(Time.time-tiempoEspera >= 5)
@@ -57,6 +57,7 @@ public class Pregunctas : MonoBehaviour {
 
     private void MostrarPregunta(int pregunta)
     {
+        
         preActual = Instantiate(Preguntas[pregunta], Vector2.zero, Quaternion.identity);
         preActual.parent = transform;
         preActual.name = "pregunta";
@@ -65,7 +66,7 @@ public class Pregunctas : MonoBehaviour {
         _btn2 = transform.Find("pregunta/btn2");
         btn1 = _btn1.GetComponent<Button>();
         btn2 = _btn2.GetComponent<Button>();
-        /*El boton 1 "btn1 siempre contendra la respuesta correcta"*/
+        /*El boton 1 "btn1" siempre contendra la respuesta correcta*/
         btn1.onClick.AddListener(()=> { CalcularRespuesta(true); });
         btn2.onClick.AddListener(()=> { CalcularRespuesta(false); });
     }
@@ -81,20 +82,21 @@ public class Pregunctas : MonoBehaviour {
         else txtScore.text = (scoreCount -= 5).ToString();
     }
 
-    private void MostrarResultado()
-    {
-        scorePanel.localPosition = Vector2.MoveTowards(scorePanel.localPosition, new Vector2(0, -395.5f), 700 * Time.deltaTime);
-        if (scorePanel.localPosition.y >= -395.5f) mostrarScore = false;
-    }
+  //  private void MostrarResultado()
+   // {
+      //  scorePanel.localPosition = Vector2.MoveTowards(scorePanel.localPosition, new Vector2(0, -395.5f), 700 * Time.deltaTime);
+       // if (scorePanel.localPosition.y >= -395.5f) mostrarScore = false;
+   // }
 
-    private void OcultarResultado()
-    {
-        scorePanel.localPosition = Vector2.MoveTowards(scorePanel.localPosition, new Vector2(0, -701), 700 * Time.deltaTime);
-        if (scorePanel.localPosition.y <= -700)
-        {
-            ocultarScore = false;
-        }
-    }
+    //private void OcultarResultado()
+    //{
+       // scorePanel.localPosition = Vector2.MoveTowards(scorePanel.localPosition, new Vector2(0, -701), 700 * Time.deltaTime);
+        //if (scorePanel.localPosition.y <= -700)
+        //{
+        //    ocultarScore = false;
+            
+        //}
+    //}
 
     private void PasarPregunta()
     {
