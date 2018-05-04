@@ -61,11 +61,12 @@ public class Pregunctas : MonoBehaviour {
 
     private void CalcularRespuesta(bool isCorrect)
     {
+        //desactiva los bototnes para que no genere mas eventos hasta que pase a la sigueinte pregunta
         btn1.interactable = false;
         btn2.interactable = false;
+        //Con este atributo activado permite el if de ocultar pregunta se ejecute
         ocultarPregunta = true;
-        if (isCorrect) txtScore.text = (scoreCount += 5).ToString();
-        else txtScore.text = (scoreCount -= 5).ToString();
+        if(isCorrect) txtScore.text = (scoreCount += 5).ToString();
     }
 
     private void PasarPregunta()
@@ -73,6 +74,7 @@ public class Pregunctas : MonoBehaviour {
         Destroy(preActual.gameObject);
         ocultarPregunta = false;
         numPregunta++;
+        //Evita que el numPregunta se salga de la dimencion del arreglo
         if (Preguntas.Length > numPregunta) mostrarPregunta = true;
         
     }
