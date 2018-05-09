@@ -13,14 +13,37 @@ public class MoviCursor : MonoBehaviour {
 	public float angulox = 0.0f;
 	public float anguloy = 0.0f;
 	public float anguloz = 0.0f;
-	public int ejeX = -1;
-	public int ejeY = 0;
 	public int pulsador = 1;
 
-	public float velocidad = 10f;
+	public int velocidad = 2;
+
+	public Animator anim;
+
+	public LayerMask groundLayerMask;
+
+	//Mover objetos con el pulsador
+	public GameObject respu; //este era la var mano
+	public GameObject mano;
+	private Vector3 inicPos;
+	private Vector3 finPos;
+	public GameObject objetivo;
+
+	//timo para tomar del inicio al fin
+	private float lerpTime =5f;
+	private float currentLerpTime =0f;
+
+	private bool keyHit = false;
+
+
+
+
 
 	// Use this for initialization
 	void Start () {
+
+		inicPos = respu.transform.position;
+		finPos = objetivo.transform.position;
+
 		oThread = new Thread(new ParameterizedThreadStart(escucharPuertoSerialArduino));
 		// Start the thread
 		oThread.Start(this);
@@ -39,9 +62,9 @@ public class MoviCursor : MonoBehaviour {
 		}
 	}
 
-	/**
-	 * Loop principal de escucha de puerto arduino 
-	 */
+
+	 // Loop principal de escucha de puerto arduino 
+
 	public void escucharPuertoSerialArduino(object parent) {
 		string ultimoData = "";
 
@@ -60,15 +83,10 @@ public class MoviCursor : MonoBehaviour {
 			String dataRaw = serial.ReadLine();
 			ultimoData = dataRaw;
 			try {
-				string[] datoArray = dataRaw.Split(",".ToCharArray(),2);
+				string[] datoArray = dataRaw.Split(",".ToCharArray(),3);
 				((MoviCursor) parent).angulox = float.Parse(datoArray[0]);
 				((MoviCursor) parent).anguloy = float.Parse(datoArray[1]);
-				//((MoviCursor) parent).anguloz = float.Parse(datoArray[2]);
-
-
-				//((MoviCursor) parent).ejeX = int.Parse(datoArray[3]);
-				//((MoviCursor) parent).ejeY = int.Parse(datoArray[4]);
-				//((MoviCursor) parent).pulsador = int.Parse(datoArray[5]);
+				((MoviCursor) parent).pulsador = int.Parse(datoArray[2]);
 			} catch (Exception e) {
 				//Debug.Log ("Error:"+e.Message+ "["+ultimoData+"]");
 			}
@@ -88,47 +106,71 @@ public class MoviCursor : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//this.transform.localEulerAngles = new Vector2 (0,0);
-		//Quaternion target = Quaternion.Euler(angulox,anguloy,0);
-		//transform.rotation = target;
+
+		MoverRespuesta ();
+			
+		MovMano ();
 
 		if (angulox > 25f) {
-			this.transform.Translate (Vector2.left * Time.deltaTime, Space.World);
+			this.transform.Translate (Vector2.left * Time.deltaTime*velocidad, Space.World);
 			Debug.Log ("Estoy dentro del rango de angulo x");
 		} else {
 			this.transform.Translate (Vector2.right * 0);
 		}
 		if(angulox < -25f){
-			this.transform.Translate (-Vector2.left * Time.deltaTime, Space.World);
-			Debug.Log ("Estoy dentro del rango de angulo x");
+			this.transform.Translate (-Vector2.left * Time.deltaTime*velocidad, Space.World);
+			Debug.Log ("Estoy dentro del rango de angulo -x");
 		
 		} else {
 			this.transform.Translate (Vector2.right * 0);
 		}
 		if (anguloy > 25f) {
-			this.transform.Translate (Vector2.down * Time.deltaTime, Space.World);
+			this.transform.Translate (Vector2.down * Time.deltaTime*velocidad, Space.World);
 		}
 		if(anguloy < -25f){
-			this.transform.Translate (-Vector2.down * Time.deltaTime, Space.World);
+			this.transform.Translate (-Vector2.down * Time.deltaTime*velocidad, Space.World);
 		} else {
 			this.transform.Translate (Vector2.up * 0);
 		}
-
-
-	//	if (ejeY > 540 && ejeY != 0) {
-	//		this.transform.position = this.transform.position - Camera.main.transform.forward * velocidad;
-	//	} else if (ejeY < 440 && ejeY != 0) {
-	//		this.transform.position = this.transform.position + Camera.main.transform.forward * velocidad;	
-	//	} else {
-			//Esta centrado en eje Y
-	//	}
-
-	//	if (ejeX > 540 && ejeY != 0) {
-	//		this.transform.position = this.transform.position + Camera.main.transform.right * velocidad;
-	//	} else if (ejeX < 440 && ejeY != 0) {
-	//		this.transform.position = this.transform.position - Camera.main.transform.right * velocidad;
-	//	} else {
-			//Esta centrado en eje Y
-	//	}
+			
 	}
-}
+
+
+	void MovMano(){
+		if (pulsador == 0) {
+			anim.SetBool("IsMovMano", true);
+		} else{
+			anim.SetBool("IsMovMano", false);
+		}
+	}
+
+	bool IsOnTheCorrect(){
+		if (Physics2D.Raycast (this.transform.position, Vector2.down, 0.5f, groundLayerMask.value)) {
+			return true;
+		} else {
+			bool rayRes;
+			return false;
+		}
+	}
+
+	public void MoverRespuesta(){
+		if (pulsador == 0) {
+			keyHit = true;
+		}
+
+		if (keyHit == true && IsOnTheCorrect ()) {
+			Debug.Log ("Estoy en el rango Objeto");
+			currentLerpTime += Time.deltaTime;
+			if (currentLerpTime >= lerpTime) {
+				currentLerpTime = lerpTime;
+			}
+
+			float Perc = currentLerpTime / lerpTime;
+			respu.transform.position = Vector3.Lerp (inicPos, finPos, Perc);
+
+		}
+			
+		}
+	}
+
+

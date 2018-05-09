@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Pregunctas : MonoBehaviour {
-    
+ 	
     public Transform[] Preguntas; /**Aqui se deben cargar las preguntas que se van a deplegar*/
     private float[] tiempo_respuestas; /**Aqui se guardan los tiempos de respuesta de cada pregunta*/    
     private Transform preActual; /**Cada pregunta instanciada se almacena en la variable preActual*/    
@@ -34,6 +34,7 @@ public class Pregunctas : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+
         if (mostrarPregunta)
         {
             mostrarPregunta = false;
@@ -41,6 +42,7 @@ public class Pregunctas : MonoBehaviour {
         }
 
         if (ocultarPregunta) PasarPregunta();     
+
     }
 
     private void MostrarPregunta(int pregunta)

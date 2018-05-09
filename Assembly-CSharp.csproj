@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{13A8BE14-3902-7BD3-4F29-9BFD5BE896D8}</ProjectGuid>
+    <ProjectGuid>{B3BD41F1-9043-B923-EA90-85A09E98B034}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -51,7 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scene\EscenePruebas\Actividades\scripts\Pregunctas.cs" />
      <Compile Include="Assets\Scene\EscenePruebas\PruebaMPU\MoviCursor.cs" />
+     <None Include="Assets\Scene\EscenePruebas\Actividades\Roboto\LICENSE.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
