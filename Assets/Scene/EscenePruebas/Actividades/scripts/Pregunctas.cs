@@ -4,16 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Pregunctas : MonoBehaviour {
-//<<<<<<< HEAD
- 	
-//=======
+
 
     /**Se inicializan las variables para asignar un nombre de estudiante*/
     private Transform _NombreEstudiante;
     private Text NombreEstudiante;
     public string txtEstudiante = "Karen Pinzón";
 
-//>>>>>>> 2cdc155f2172e9a34b7990e5c60c24658bd3d2bd
+
     public Transform[] Preguntas; /**Aqui se deben cargar las preguntas que se van a deplegar*/
     private float[] tiempo_respuestas; /**Aqui se guardan los tiempos de respuesta de cada pregunta*/
     private float[] respuestas;
@@ -62,13 +60,9 @@ public class Pregunctas : MonoBehaviour {
             mostrarPregunta = false;
             MostrarPregunta(numPregunta);
         }
+			
+       if (ocultarPregunta) PasarPregunta();     
 
-//<<<<<<< HEAD
-        if (ocultarPregunta) PasarPregunta();     
-
-//=======
-        if (ocultarPregunta) PasarPregunta();
-//>>>>>>> 2cdc155f2172e9a34b7990e5c60c24658bd3d2bd
     }
 
     private void MostrarPregunta(int pregunta)
