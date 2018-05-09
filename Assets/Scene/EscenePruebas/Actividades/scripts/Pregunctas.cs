@@ -18,6 +18,8 @@ public class Pregunctas : MonoBehaviour {
     private Button btnCorrecto, btn2; /**Se declara el componente Button para procesar las respuestas obtenidas*/
     private Transform score; /**se declara el atributo score para buscarlo en el canvas*/
     private Text txtScore; /**se el componente text para settear la puntuacion*/
+    private Transform _pruebaFinalizada;
+    private Text pruebaFinalizada;
 
 
     private int numPregunta; /**Este numero indica la posicion en el arreglo de preguntas[]*/
@@ -31,6 +33,11 @@ public class Pregunctas : MonoBehaviour {
         _NombreEstudiante = transform.Find("estudiante");
         NombreEstudiante = _NombreEstudiante.GetComponent<Text>();
         NombreEstudiante.text = txtEstudiante;
+
+        _pruebaFinalizada = transform.transform.Find("fin");
+        pruebaFinalizada = _pruebaFinalizada.GetComponent<Text>();
+        pruebaFinalizada.color = new Vector4(0,0,0,0);
+
         score = transform.Find("score"); /*Se busca el objeto dentro de los hijos de Canvas*/
         txtScore = score.GetComponent<Text>(); /* se obtiene el atributo Text para poder modificar el score con cada pregunta*/
         scoreCount = 0; /*Se inicializa el contador en cero para empezar la actividad de un estudiante*/
@@ -117,6 +124,7 @@ public class Pregunctas : MonoBehaviour {
         foreach (float tiempos in tiempo_respuestas) totalTiempo += tiempos;
         promedioNotas = totalNotas / respuestas.Length;
         promedioTiempo = totalTiempo / tiempo_respuestas.Length;
+        pruebaFinalizada.color = new Vector4(0, 0, 0, 1);
         Debug.Log("nota: " + promedioNotas + " | Tiempo: " + promedioTiempo);
     }
 
