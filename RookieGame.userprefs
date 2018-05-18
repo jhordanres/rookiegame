@@ -1,9 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scene\EscenePruebas\Actividades\scripts\Pregunctas.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scenes\gestionBD.cs">
     <Files>
       <File FileName="Assets\Scene\EscenePruebas\PruebaMPU\MoviCursor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scene\EscenePruebas\Actividades\scripts\Pregunctas.cs" Line="96" Column="20" />
+      <File FileName="Assets\Scene\EscenePruebas\Actividades\scripts\Pregunctas.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scenes\gestionBD.cs" Line="39" Column="32" />
+      <File FileName="Assets\Scenes\login.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scenes\levelManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

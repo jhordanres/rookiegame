@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/EscenePruebas/Actividades/discalculia.unity
+- path: Assets/Scenes/UIinicio.unity
   isLoaded: 1
   isActive: 1

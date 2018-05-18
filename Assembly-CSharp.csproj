@@ -53,6 +53,9 @@
   <ItemGroup>
      <Compile Include="Assets\Scene\EscenePruebas\Actividades\scripts\Pregunctas.cs" />
      <Compile Include="Assets\Scene\EscenePruebas\PruebaMPU\MoviCursor.cs" />
+     <Compile Include="Assets\Scenes\gestionBD.cs" />
+     <Compile Include="Assets\Scenes\levelManager.cs" />
+     <Compile Include="Assets\Scenes\login.cs" />
      <None Include="Assets\Scene\EscenePruebas\Actividades\Roboto\LICENSE.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
