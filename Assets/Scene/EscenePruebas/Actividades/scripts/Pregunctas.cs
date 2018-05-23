@@ -86,15 +86,13 @@ public class Pregunctas : MonoBehaviour {
     {
         //desactiva los bototnes para que no genere mas eventos hasta que pase a la sigueinte pregunta
         btnCorrecto.interactable = false;
-        btn2.interactable = false;
-        
-
+        btn2.interactable = false;   
         float duracionRespueta;
-        txtScore.text = (scoreCount += 5).ToString();
         duracionRespueta = Time.time - tiempo;
         tiempo_respuestas[numPregunta] = duracionRespueta;
         if (isCorrect)
         {
+	    txtScore.text = (scoreCount += 5).ToString();
             if (duracionRespueta <= 7) respuestas[numPregunta] = 5.0f;
             else if (duracionRespueta > 7 && duracionRespueta <= 20) respuestas[numPregunta] = 4.0f;
             else if (duracionRespueta > 20 && duracionRespueta <= 60) respuestas[numPregunta] = 3.0f;
